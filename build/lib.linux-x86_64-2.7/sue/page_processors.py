@@ -1,5 +1,5 @@
 from mezzanine.pages.page_processors import processor_for
-from .models import Portfolio, PortfolioItem, PortfolioItemCategory, HomePage, TempPortfolio, Portfolios
+from .models import Portfolio, PortfolioItem, PortfolioItemCategory, HomePage, TempPortfolio, Portfolios, DocumentList, DocumentListItem, DocumentListItemCategory
 
 @processor_for(Portfolios)
 def portfolios_processor(request, page):
@@ -47,3 +47,11 @@ def home_processor(request, page):
     temp_portfolio = temp_portfolio.filter(parent=page) ##TempPorfolio should be nested under the HomePage
     return {'items': items, 'portfolio': portfolio,
             'temp_portfolio': temp_portfolio}
+
+@processor_for(DocumentList)
+def documentlist_processor(request, page):
+
+    category = DocumentListItemCategory.objects.all()
+    items = DocumentListItem.objects.filter(documentlist_id=page.documentlist.id)
+
+    return {'category': category, 'items': items}

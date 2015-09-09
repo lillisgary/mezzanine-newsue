@@ -121,3 +121,32 @@ class PortfolioItemCategory(Slugged):
         verbose_name = _("Portfolio Item Category")
         verbose_name_plural = _("Portfolio Item Categories")
         ordering = ("title",)
+
+class DocumentList(Page, RichText):
+	'''
+	A collection of Document list items
+	'''
+	heading = models.CharField(max_length=250,
+	    help_text="The heading for the Document list")
+	    
+class DocumentListItemCategory(Slugged):
+	'''
+	A category for grouping document items into categories
+	'''
+	
+	class Meta:
+		verbose_name = _("Document List Item Category")
+		verbose_name_plural = _("Document List Item Categories")
+		ordering = ("title",)
+		
+class DocumentListItem(Orderable):
+	'''
+	Individual documents for document list
+	'''
+	
+	documentlist = models.ForeignKey(DocumentList, related_name="documents", blank=True, null=True)
+	files = FileField(verbose_name=_("File"), null=True, blank=True,
+	    upload_to=upload_to("theme.DocumentListItem.file", "documents"))
+	title = models.CharField(max_length=200)
+	category = models.ForeignKey(DocumentListItemCategory, related_name="category", blank=True, null=True)
+	    
