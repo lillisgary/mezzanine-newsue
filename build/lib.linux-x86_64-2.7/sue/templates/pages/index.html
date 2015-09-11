@@ -2,17 +2,6 @@
 {% load i18n %}
 {% load pages_tags mezzanine_tags i18n future staticfiles %}
 
-{% block extra_js %}
-<script type="text/javascript">
-$(document).ready(function(){
-     $("#myCarousel").carousel({
-         interval : 3000,
-         
-     });
-});
-</script>
-{% endblock %}
-
 {% block title %}{{ page.title }}{% endblock %}
 
 {% block l_w %}{% endblock %}
@@ -46,7 +35,7 @@ $(document).ready(function(){
     	<!-- Carousel indicators -->
         <ol class="carousel-indicators">
         {% for slide in page.homepage.slides.all %}
-          {% if slide.featured_image %}
+          {% if forloop.counter == 1 %}
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
           {% else %}
             <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -58,10 +47,10 @@ $(document).ready(function(){
         <!-- Carousel items -->
         <div class="carousel-inner">
         {% for slide in page.homepage.slides.all %}
-            {% if slide.featured_image %}
+            {% if forloop.counter == 1 %}
             <div class="active item">
                 <img src="{{ MEDIA_URL }}{% thumbnail slide.image 1920 690 %}" class="img-responsive" alt="">
-                <h2>Slide 1</h2>                
+                <h2>Slide 1</h2>              
          		 <div class="carousel-caption">
                   <h3>{{ slide.main_label|title }}</h3>
                   <p>{{ slide.sub_label }}</p>

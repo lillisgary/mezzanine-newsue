@@ -12,12 +12,12 @@ Theme for Mezzanine 3.1.10
 
 # above other installed apps
 
-2. Run "python manage.py schemamigration sue --initial"
+2. Run "python manage.py schemamigration sue --initial" # Mezzanine 4+ "python manage.py makemigrations sue"
 
-3. Run "python manage.py migrate sue" # in Mezzanine 4+ just run "python manage.py syncdb"
+3. Run "python manage.py migrate sue" # Mezzanine 4+ "python manage.py migrate sue"
 
 4. Change your URLs
 
-5. Start dev server to check all is good
+5. Start dev server and log into the admin interface, select a skin in the settings, and save.
 
 
